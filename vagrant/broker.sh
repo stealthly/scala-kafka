@@ -50,6 +50,7 @@ sed 's/zookeeper.connect=localhost:2181/'zookeeper.connect=192.168.86.5:2181'/' 
 /vagrant/vagrant/kafka.sh #install kafka
 /vagrant/vagrant/kafkacat.sh #install the kafkacat utility
 
+chmod a+rw -R /opt/apache # grant write permission for logging
 /opt/apache/kafka/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
 
 exitscript

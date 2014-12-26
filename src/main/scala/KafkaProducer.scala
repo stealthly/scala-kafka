@@ -93,7 +93,7 @@ case class KafkaProducer(
 
   val producer = new Producer[AnyRef, AnyRef](new ProducerConfig(props))
   
-  def kafkaMesssage(message: Array[Byte], partition: Array[Byte]): KeyedMessage[AnyRef, AnyRef] = {
+  def kafkaMesssage(message: Array[Byte], partition: String): KeyedMessage[AnyRef, AnyRef] = {
      if (partition == null) {
        new KeyedMessage(topic,message)
      } else {
@@ -101,9 +101,9 @@ case class KafkaProducer(
      }
   }
   
-  def send(message: String, partition: String = null): Unit = send(message.getBytes("UTF8"), if (partition == null) null else partition.getBytes("UTF8"))
+  def send(message: String, partition: String = null): Unit = send(message.getBytes("UTF8"), if (partition == null) null else partition)
 
-  def send(message: Array[Byte], partition: Array[Byte]): Unit = {
+  def send(message: Array[Byte], partition: String): Unit = {
     try {
       producer.send(kafkaMesssage(message, partition))
     } catch {
